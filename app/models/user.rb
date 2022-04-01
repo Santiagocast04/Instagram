@@ -6,4 +6,15 @@ class User < ApplicationRecord
 
   has_many :posts
   has_many :comments
+  has_one_attached :avatar
+
+  def avatar_thumbnail
+    if avatar.attached?
+      avatar.variant resize_to_limit: [50, 50]
+    else
+      "/default_profile.png"
+    end
+  end
 end
+
+

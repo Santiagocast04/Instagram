@@ -1,27 +1,46 @@
-<div class="w-full">
-  <h3 class="mb-4 text-lg font-semibold text-gray-900">Comments</h3>
-  <% @post.comments.each do |comment| %>
-    <div class="antialiased mx-auto max-w-screen-sm">
-      <div class="space-y-4">
-        <div class="flex">
-          <div class="flex-shrink-0 mr-3">
-            <img class="mt-2 rounded-full w-8 h-8 sm:w-10 sm:h-10" src="https://images.unsplash.com/photo-1604426633861-11b2faead63c?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=200&h=200&q=80" alt="">
+<div class="container">
+  <div class="py-8">
+  </div>
+  <div class="w-full h-full bg-gray-800 bg-opacity-90 top-1 overflow-y-auto overflow-x-hidden fixed sticky-0" id="chec-div">
+    <% @post.pictures.each do |picture| %>
+      <%= image_tag picture %>
+    <% end %>
+    <div class="w-full absolute z-10 right-20 h-full overflow-x-hidden transform translate-x-0 transition ease-in-out duration-700" id="notification">
+      <div class="2xl:w-4/12 bg-gray-50 h-screen overflow-y-auto p-10 absolute right-0">
+        <div class="w-full p-3 mt-8 bg-white rounded flex">
+          <div tabindex="0" aria-label="heart icon" role="img" class="focus:outline-none w-8 h-8 border rounded-full border-gray-200 flex items-center justify-center">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <%= link_to image_tag(@post.user.avatar, class: "rounded-full border border-gray-100 shadow-sm") if current_user.avatar.attached?%>
+            </svg>
           </div>
-          <div class="flex-1 border rounded-lg px-4 py-2 sm:px-6 sm:py-4 leading-relaxed">
-              <strong><%= comment.user.username %></strong> <span class="text-xs text-gray-400"><%= time_ago_in_words(comment.created_at) %></span>
-              <p class="text-sm">
-                <%= comment.content %>
-              </p>
-              <div class="mt-4 flex items-center">
-
-                <div class="text-sm text-gray-500 font-semibold">
-                  5 Replies
-                </div>
-              </div>
+          <div class="pl-3">
+            <p tabindex="0" class="focus:outline-none text-sm leading-none"><span><%= link_to(@post.user.username,users_show_path(@post.user) ) %></span>
+            <p tabindex="0" class="focus:outline-none text-xs leading-3 pt-1 text-gray-500"><%=@post.description %></p>
           </div>
         </div>
+        COMMENTS
+        <%@post.comments.each do |comment| %>
+          <div class="w-full p-3 mt-4 bg-white rounded shadow flex flex-shrink-0">
+            <div tabindex="0" aria-label="group icon" role="img" class="focus:outline-none w-8 h-8 border rounded-full border-gray-200 flex flex-shrink-0 items-center justify-center">
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <%= link_to image_tag(comment.user.avatar, class: "rounded-full border border-gray-100 shadow-sm") if comment.user.avatar.attached? %>
+              </svg>
+            </div>
+            <div class="pl-3 w-full">
+              <div class="flex items-center justify-between w-full">
+                <p tabindex="0" class="focus:outline-none text-sm leading-none"><span><%= comment.user.username %></span>
+                <div tabindex="0" aria-label="close icon" role="button" class="focus:outline-none cursor-pointer">
+                  <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M10.5 3.5L3.5 10.5" stroke="#4B5563" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round" />
+                    <path d="M3.5 3.5L10.5 10.5" stroke="#4B5563" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round" />
+                  </svg>
+                </div>
+              </div>
+              <p tabindex="0" class="focus:outline-none text-xs leading-3 pt-1 text-gray-500"><%=comment.content %></p>
+            </div>
+          </div>
+        <%end %>
       </div>
     </div>
-  <%end %>
+  </div>
 </div>
-
