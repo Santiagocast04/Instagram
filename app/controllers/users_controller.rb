@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   def show
     @user = current_user
-    @post = Post.find_by(params[:id])
+    @post = current_user.posts
   end
 end

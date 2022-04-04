@@ -1,11 +1,10 @@
 class CommentsController < ApplicationController
-  before_action :set_comment, only: %i[ show edit update destroy ]
+  before_action :set_comment, only: %i[ show edit update destroy  ]
   before_action :set_post
 
   # GET /comments or /comments.json
   def index
-    @comments = Comment.all
-
+    @comments = @post.comments
   end
 
   # GET /comments/1 or /comments/1.json

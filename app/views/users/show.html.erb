@@ -77,12 +77,10 @@
     </div>
 
     <!--post images-->
-    <div class="flex pt-4">
-      <div class="flex-1 text-center px-4 py-2 m-2">
-        <%@posts.pictures.each do |post| %>
-          <%=image_tag post %>
-        <%end %>
-      </div>
-    </div>
+    <% @user.posts.each do |posts| %>
+      <% posts.pictures.each do |picture| %>
+        <%= image_tag picture, class: "w-full flex-pt-4  flex-1 text-center px-4 py-2 m-2" %>
+      <%end %>
+    <%end %>
   </div>
 </div>
