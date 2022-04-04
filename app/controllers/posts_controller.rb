@@ -1,13 +1,15 @@
 class PostsController < ApplicationController
   before_action :set_post, only: %i[ show edit update destroy ]
+  before_action :set_user, only: %i[ index show ]
 
   # GET /posts or /posts.json
   def index
     @posts = Post.all.order("created_at desc")
-  end
+      end
 
   # GET /posts/1 or /posts/1.json
   def show
+    @comment = Comment.new
   end
 
   # GET /posts/new
@@ -23,10 +25,9 @@ class PostsController < ApplicationController
   def create
     @post = Post.new(post_params)
     @post.user = current_user
-
     respond_to do |format|
       if @post.save
-        format.html { redirect_to post_url(@post), notice: "Post was successfully created." }
+        format.html { redirect_to root_path, notice: "Post was successfully created." }
         format.json { render :show, status: :created, location: @post }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -67,5 +68,9 @@ class PostsController < ApplicationController
     # Only allow a list of trusted parameters through.
     def post_params
       params.require(:post).permit(:description, :user_id, pictures: []) 
+    end
+
+    def set_user
+      @user = User.find_by(params[:id])
     end
 end

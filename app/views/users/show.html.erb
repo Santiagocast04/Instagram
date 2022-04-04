@@ -39,7 +39,7 @@
             aria-label="User menu"
             aria-haspopup="true"
           >
-            <%= image_tag(@user.avatar, class: "rounded-full border border-gray-100 shadow-sm") %>
+            <%= image_tag(@user.avatar, class: "rounded-full border border-gray-100 shadow-sm") if @user.avatar.attached? %>
           </button>
         </div>
       </div>

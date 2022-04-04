@@ -1,6 +1,6 @@
 <div class="container">
   <% @post.pictures.each do |picture| %>
-    <%= image_tag picture, class: "w-250 h-full bg-gray-800 bg-opacity-90 top-1 overflow-y-auto overflow-x-hidden fixed sticky-0" %>
+    <%= image_tag picture, class: "w-f250 h-full bg-gray-800 bg-opacity-90 top-1 overflow-y-auto overflow-x-hidden fixed sticky-0" %>
   <% end %>
   <div class="w-full top-0 absolute z-10 left-0 right-0 h-full overflow-x-hidden transform translate-x-0 transition ease-in-out duration-700" id="notification">
     <div class="2xl:w-4/12 bg-gray-50 h-screen overflow-y-auto p-20 absolute right-0">
@@ -32,6 +32,9 @@
         </div>
       <%end %>
       <div class="mt-4 border border-grey w-full border-1 rounded p-2 relative focus:border-red">
+        <div class="flex">
+          <input name="field_name" class="border border-2 rounded-r px-4 py-2 w-full" type="text" placeholder="Write something here..." />
+        </div>
       </div>
     </div>
   </div>
