@@ -1,11 +1,10 @@
 class PostsController < ApplicationController
   before_action :set_post, only: %i[ show edit update destroy ]
-  before_action :set_user, only: %i[ index show ]
 
   # GET /posts or /posts.json
   def index
     @posts = Post.all.order("created_at desc")
-      end
+  end
 
   # GET /posts/1 or /posts/1.json
   def show
@@ -71,7 +70,4 @@ class PostsController < ApplicationController
       params.require(:post).permit(:description, :user_id, pictures: []) 
     end
 
-    def set_user
-      @user = User.find_by(params[:id])
-    end
 end

@@ -1,12 +1,13 @@
 <div class="insta-clone">
-  <div class="bg-gray-100 h-auto px-48">
+  <div class="bg-gray-100 h-auto px-48 ">
     <div class="flex md:flex-row-reverse flex-wrap">
       <div class="w-full md:w-3/4 p-4 text-center">
         <div class="text-left pl-4 pt-3">
           <span class="text-base text-gray-700 text-2xl mr-2"><%= @user.username %></span>
           <span class="text-base font-semibold text-gray-700 mr-2">
-              <%= link_to 'Edit this account', edit_user_registration_path, class: "bg-transparent hover:bg-blue-500 text-gray-700 font-semibold hover:text-white py-2 px-4 border border-gray-600 hover:border-transparent rounded" %>
-            </span>
+            <%= link_to 'Sign out',destroy_user_session_path, 'data-turbo-method': :delete, class:"bg-transparent hover:bg-blue-500 text-gray-700 font-semibold hover:text-white py-2 px-4 border border-gray-600 hover:border-transparent rounded" if @user == current_user %>
+            <%= link_to 'Edit this account', edit_user_registration_path, class: "bg-transparent hover:bg-blue-500 text-gray-700 font-semibold hover:text-white py-2 px-4 border border-gray-600 hover:border-transparent rounded" if @user == current_user %>
+          </span>
         </div>
         <div class="text-left pl-4 pt-3">
             <span class="text-base font-semibold text-gray-700 mr-2">
@@ -30,7 +31,6 @@
           </p>
         </div>
       </div>
-
       <div class="w-full md:w-1/4 p-4 text-center">
         <div class="w-full relative md:w-3/4 text-center mt-8">
           <button
@@ -64,9 +64,6 @@
               stroke="currentColor"
               viewBox="0 0 24 24"
             >
-              <path
-                d="M17 14v6m-3-3h6M6 10h2a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v2a2 2 0 002 2zm10 0h2a2 2 0 002-2V6a2 2 0 00-2-2h-2a2 2 0 00-2 2v2a2 2 0 002 2zM6 20h2a2 2 0 002-2v-2a2 2 0 00-2-2H6a2 2 0 00-2 2v2a2 2 0 002 2z"
-                />
             </svg>
           </button>
         </div>
@@ -79,7 +76,7 @@
     <!--post images-->
     <% @user.posts.each do |posts| %>
       <% posts.pictures.each do |picture| %>
-        <%= image_tag picture, class: "w-full flex-pt-4  flex-1 text-center px-4 py-2 m-2" %>
+        <%=image_tag(picture, class: "w-full flex-pt-4  flex-1 text-center px-4 py-2 m-2")%>
       <%end %>
     <%end %>
   </div>

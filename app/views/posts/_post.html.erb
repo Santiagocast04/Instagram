@@ -14,19 +14,19 @@
       }
   </style>
   <body class="relative bg-gray-200 h-full">
-  <div class="page-content pt-6 h-full">
-    <div class="container mx-auto flex h-full">
+  <div class=" page-content pt-6 h-full">
+    <div class="container  mx-auto flex h-full">
       <div class="left w-8/12 pr-4">
         <div class="feeds">
           <div class="feed-wrapper mb-4">
             <div class="feed-item border border-gray-400 rounded bg-white">
               <div class="header border-b p-4 flex justify-between items-center">
-                <div class="left flex flex-row items-center">
+                <div class="left flex flex-row items-center ">
                   <div class="user-img h-10 w-10 border rounded-full overflow-hidden mr-4">
                     <img alt="nike's profile picture" class="_6q-tv" data-testid="user-avatar" draggable="false" src="https://scontent-nrt1-1.cdninstagram.com/v/t51.2885-19/s150x150/20635165_1942203892713915_5464937638928580608_a.jpg?_nc_ht=scontent-nrt1-1.cdninstagram.com&_nc_ohc=JK-0WwYKXBgAX-mFP6I&oh=e0d86b1c4be3cea94e341f18e17905b3&oe=5F94C764">
                   </div>
                   <div class="user-name-and-place flex flex-col">
-                    <span class="text-sm font-bold"><%= link_to post.user.username, user_path(@user)%></span>
+                    <span class="text-sm font-bold"><%= link_to post.user.username, user_path(post.user)%></span>
                   </div>
                 </div>
                 <div class="right">
@@ -72,7 +72,7 @@
                   </div>
                   <div class="likes mt-1">
 										<span class="font-bold text-sm">
-											7,000,243,578 likes
+											<%= post.likes.count %> like
 										</span>
                   </div>
                   <div class="caption text-sm mt-3">

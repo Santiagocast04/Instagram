@@ -61,7 +61,7 @@ class CommentsController < ApplicationController
   private
 
     def set_post
-      @post = Post.find_by(params[:post_id])
+      @post = Post.find(params[:post_id])
     end
     # Use callbacks to share common setup or constraints between actions.
     def set_comment
@@ -69,7 +69,7 @@ class CommentsController < ApplicationController
     end
 
     def set_user
-      @user = User.find_by(params[:id])
+      @user = User.find(params[:id])
     end
 
     # Only allow a list of trusted parameters through.
