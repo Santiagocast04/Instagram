@@ -7,6 +7,7 @@ class User < ApplicationRecord
   has_many :posts
   has_many :comments
   has_one_attached :avatar
+  has_many :likes, as: :likeable
 
   def avatar_thumbnail
     if avatar.attached?
