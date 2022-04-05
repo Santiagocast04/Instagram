@@ -20,7 +20,6 @@
         <div class="w-full p-3 mt-4 bg-white rounded shadow flex flex-shrink-0">
           <div tabindex="0" aria-label="group icon" role="img" class="focus:outline-none w-8 h-8 border rounded-full border-gray-200 flex flex-shrink-0 items-center justify-center">
             <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <% %>
               <%= link_to image_tag(comment.user.avatar, class: "rounded-full border border-gray-100 shadow-sm") if comment.user.avatar.attached? %>
             </svg>
           </div>
@@ -35,7 +34,7 @@
       <%= form_with(model: [@post, @comment]) do |form| %>
         <div class="mt-4 border border-grey w-full border-1 rounded p-2 relative focus:border-red">
           <div class="flex">
-            <%= form.text_field :content, rows: 4, class: "border border-2 rounded-r px-4 py-2 w-full" %>
+            <%= form.text_field :content, rows: 4, class: "border border-2 rounded-r px-4 py-2 w-full", placeholder: "write a comment" %>
           </div>
         </div>
       <%end %>
