@@ -1,11 +1,11 @@
 <div class="container">
   <% @post.pictures.each do |picture| %>
-    <%= image_tag picture, class: "w-f250 h-full bg-gray-800 bg-opacity-90 top-1 overflow-y-auto overflow-x-hidden fixed sticky-0" %>
+    <%= image_tag picture, class: "lg:max-w-4xl h-full bg-gray-800 bg-opacity-90 top-1 overflow-y-auto overflow-x-hidden fixed sticky-0" %>
   <% end %>
   <div class="w-full top-0 absolute z-10 left-0 right-0 h-full overflow-x-hidden transform translate-x-0 transition ease-in-out duration-700" id="notification">
     <div class="2xl:w-4/12 bg-gray-50 h-screen overflow-y-auto p-20 absolute right-0">
-      <div class="w-250 p-3 mt-8 bg-white rounded flex">
-        <div class="focus:outline-none w-8 h-8 border rounded-full border-gray-200 flex items-center justify-center">
+      <div class="w-250 p-3 lg:max-w-4xl  mt-8 bg-white rounded flex">
+        <div class="focus:outline-none w-8 h-8 w- border rounded-full border-gray-200 flex items-center justify-center">
           <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
             <%= link_to image_tag(@post.user.avatar, class: "rounded-full border border-gray-100 shadow-sm") if current_user.avatar.attached?%>
           </svg>
@@ -20,7 +20,7 @@
         <div class="w-full p-3 mt-4 bg-white rounded shadow flex flex-shrink-0">
           <div tabindex="0" aria-label="group icon" role="img" class="focus:outline-none w-8 h-8 border rounded-full border-gray-200 flex flex-shrink-0 items-center justify-center">
             <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <%= link_to image_tag(comment.user.avatar, class: "rounded-full border border-gray-100 shadow-sm") if comment.user.avatar.attached? %>
+              <%= link_to image_tag(comment.user.avatar, class: "rounded-full border  border-gray-100 shadow-sm") if comment.user.avatar.attached? %>
             </svg>
           </div>
           <div class="pl-3 w-full">
