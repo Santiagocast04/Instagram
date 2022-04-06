@@ -1,10 +1,9 @@
 class LikesController < ApplicationController
   before_action :set_like, only: %i[ show edit update destroy ]
 
-
   # POST /likes or /likes.json
   def create
-    @like = Like.new(like_params)
+    @like = current_user.likes.new(like_params)
 
     respond_to do |format|
       if @like.save
@@ -16,9 +15,11 @@ class LikesController < ApplicationController
       end
     end
   end
-  
+
   # DELETE /likes/1 or /likes/1.json
   def destroy
+    @like = current_user.likes.find(params[:id])
+    post = @like.post
     @like.destroy
 
     respond_to do |format|
@@ -28,13 +29,14 @@ class LikesController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_like
-      @like = Like.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def like_params
-      params.require(:like).permit(:user_id, :likeable_id, :likeable_type)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_like
+    @like = Like.find(params[:id])
+  end
+
+  # Only allow a list of trusted parameters through.
+  def like_params
+    params.require(:like).permit(:user_id, :likeable_id, :likeable_type)
+  end
 end
