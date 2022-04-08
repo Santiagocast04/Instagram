@@ -16,10 +16,10 @@
         </div>
         <div class="text-left pl-4 pt-3">
             <span class="text-base font-semibold text-gray-700 mr-2">
-              <b><%= @user.posts.count %></b> posts
+              <b><%= @user.posts.count %></b> <%=@user.posts.count == 1? "post" : "posts"%>
             </span>
           <span class="text-base font-semibold text-gray-700 mr-2">
-              <b><%= @user.followers.count %></b> followers
+              <b><%= @user.followers.count %></b> <%= @user.followers.count == 1? "follower" : "followers" %>
             </span>
           <span class="text-base font-semibold text-gray-700">
               <b><%= @user.following.count %></b> following

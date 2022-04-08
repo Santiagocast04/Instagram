@@ -1,11 +1,14 @@
 class LikesController < ApplicationController
 
-  # POST /likes or /likes.json
   def create
-    @like = current_user.likes.new(like_params)
+    @like = current_user.likes.new(likeable_id: 17, likeable_type: "Post")
+    @post = @like.likeable
     respond_to do |format|
       if @like.save
-        format.html { redirect_to like_url(@like), notice: "Like was successfully created." }
+        format.turbo_stream do
+          render turbo_stream: turbo_stream.update('like_button', partial: "posts/post", locals: { post: @post})
+        end
+        format.html { redirect_to root_path }
         format.json { render :show, status: :created, location: @like }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -14,21 +17,22 @@ class LikesController < ApplicationController
     end
   end
 
-  # DELETE /likes/1 or /likes/1.json
   def destroy
-    @like = current_user.likes.find(params[:id])
-    post = @like.post
-    @like.destroy
-
+    @like = current_user.likes.find_by(params[:like])
     respond_to do |format|
-      format.html { redirect_to root_path, notice: "Like was successfully destroyed." }
-      format.json { head :no_content }
+      if @like.destroy
+        format.turbo_stream { render turbo_stream: turbo_stream.remove(@like) }
+
+        format.html { redirect_to root_path }
+        format.json { head :no_content }
+      end
     end
   end
 
   private
+
   # Only allow a list of trusted parameters through.
   def like_params
-    params.require(:like).permit(:user_id, :likeable_id, :likeable_type)
+    params.require(:like).permit(:likeable_id, :likeable_type)
   end
 end

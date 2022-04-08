@@ -7,37 +7,38 @@
       <div class="w-250 p-3 lg:max-w-4xl  mt-8 bg-white rounded flex">
         <div class="focus:outline-none w-8 h-8 w- border rounded-full border-gray-200 flex items-center justify-center">
           <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <%= link_to image_tag(@post.user.avatar, class: "rounded-full border border-gray-100 shadow-sm") if current_user.avatar.attached?%>
+            <%= link_to image_tag(@post.user.avatar, class: "rounded-full border border-gray-100 shadow-sm") if current_user.avatar.attached? %>
           </svg>
         </div>
         <div class="pl-3">
-          <p tabindex="0" class="focus:outline-none text-sm leading-none"><span><%= link_to(@post.user.username,users_show_path(@post.user) ) %></span>
-          <p tabindex="0" class="focus:outline-none text-xs leading-3 pt-1 text-gray-500"><%=@post.description %></p>
+          <p tabindex="0" class="focus:outline-none text-sm leading-none">
+            <span><%= link_to(@post.user.username, users_show_path(@post.user)) %></span>
+          <p tabindex="0" class="focus:outline-none text-xs leading-3 pt-1 text-gray-500"><%= @post.description %></p>
         </div>
       </div>
       COMMENTS
-      <%@post.comments.each do |comment| %>
-        <div class="w-full p-3 mt-4 bg-white rounded shadow flex flex-shrink-0">
+      <% @post.comments.where(parent_id: nil).each do |comment| %>
+        <div class="w-full h p-3 mt-4 bg-white rounded shadow flex flex-shrink-0">
           <div tabindex="0" aria-label="group icon" role="img" class="focus:outline-none w-8 h-8 border rounded-full border-gray-200 flex flex-shrink-0 items-center justify-center">
             <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <%= link_to image_tag(comment.user.avatar, class: "rounded-full border  border-gray-100 shadow-sm") if comment.user.avatar.attached? %>
+              <%= link_to image_tag(comment.user.avatar, class: "block mx-auto bg-center bg-no-repeat bg-cover w-9 h-9 rounded-full border border-gray-400 shadow-lg") if comment.user.avatar.attached? %>
             </svg>
           </div>
           <div class="pl-3 w-full">
             <div class="flex items-center justify-between w-full">
               <p tabindex="0" class="focus:outline-none text-sm leading-none"><span><%= comment.user.username %></span>
             </div>
-            <p tabindex="0" class="focus:outline-none text-xs leading-3 pt-1 text-gray-500"><%=comment.content %></p>
+            <p tabindex="0" class="focus:outline-none text-xs leading-3 pt-1 text-gray-500"><%= comment.content %></p>
           </div>
         </div>
-      <%end %>
+      <% end %>
       <%= form_with(model: [@post, @comment]) do |form| %>
         <div class="mt-4 border border-grey w-full border-1 rounded p-2 relative focus:border-red">
           <div class="flex">
             <%= form.text_field :content, rows: 4, class: "border border-2 rounded-r px-4 py-2 w-full", placeholder: "write a comment" %>
           </div>
         </div>
-      <%end %>
+      <% end %>
     </div>
   </div>
 </div>
