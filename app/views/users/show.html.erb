@@ -1,5 +1,6 @@
+<!-- component -->
 <div class="insta-clone">
-  <div class="bg-gray-100 h-auto px-48 ">
+  <div class="bg-gray-100 h-auto px-48">
     <div class="flex md:flex-row-reverse flex-wrap">
       <div class="w-full md:w-3/4 p-4 text-center">
         <div class="text-left pl-4 pt-3">
@@ -14,12 +15,13 @@
             <%= link_to 'Sign out', destroy_user_session_path, 'data-turbo-method': :delete, class: "bg-transparent hover:bg-blue-500 text-gray-700 font-semibold hover:text-white py-2 px-4 border border-gray-600 hover:border-transparent rounded" if @user == current_user %>
           </span>
         </div>
+
         <div class="text-left pl-4 pt-3">
             <span class="text-base font-semibold text-gray-700 mr-2">
-              <b><%= @user.posts.count %></b> <%=@user.posts.count == 1? "post" : "posts"%>
+              <b><%= @user.posts.count %></b> posts
             </span>
           <span class="text-base font-semibold text-gray-700 mr-2">
-              <b><%= @user.followers.count %></b> <%= @user.followers.count == 1? "follower" : "followers" %>
+              <b><%= @user.followers.count %></b> followers
             </span>
           <span class="text-base font-semibold text-gray-700">
               <b><%= @user.following.count %></b> following
@@ -27,28 +29,18 @@
         </div>
 
         <div class="text-left pl-4 pt-3">
-          <span class="text-lg font-bold text-gray-700 mr-2"><%= @user.username %></span>
-        </div>
-
-        <div class="text-left pl-4 pt-3">
-          <p class="text-base font-medium text-gray-700 mr-2">
-            <%= @user.about %>
-          </p>
+          <%= @user.about %>
         </div>
       </div>
+
       <div class="w-full md:w-1/4 p-4 text-center">
-        <div class="w-full relative md:w-3/4 text-center mt-8 h">
-          <button
-            class="flex rounded-full"
-            id="user-menu"
-            aria-label="User menu"
-            aria-haspopup="true"
-          >
-            <%= image_tag(@user.avatar, class: "block mx-auto bg-center bg-no-repeat bg-cover w-32 h-32 rounded-full border border-gray-400 shadow-lg") if @user.avatar.attached? %>
-          </button>
+        <div class="w-full relative md:w-3/4 text-center mt-8">
+          <%= image_tag(@user.avatar, class: "block mx-auto bg-center bg-no-repeat bg-cover w-32 h-32 rounded-full border border-gray-400 shadow-lg") if @user.avatar.attached? %>
         </div>
       </div>
     </div>
+
+    <!--status show icon-->
     <hr class="border-gray-500 mt-6"/>
     <hr class="border-gray-500 w-20 border-t-1 ml-64 border-gray-800"/>
 
@@ -69,25 +61,27 @@
               stroke="currentColor"
               viewBox="0 0 24 24"
             >
+              <path
+                d="M17 14v6m-3-3h6M6 10h2a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v2a2 2 0 002 2zm10 0h2a2 2 0 002-2V6a2 2 0 00-2-2h-2a2 2 0 00-2 2v2a2 2 0 002 2zM6 20h2a2 2 0 002-2v-2a2 2 0 00-2-2H6a2 2 0 00-2 2v2a2 2 0 002 2z"
+                />
             </svg>
           </button>
         </div>
         <div class="flex inline-flex ml-2 mt-1">
-          <h3 class="text-sm font-bold text-gray-800 mr-2">POSTS</h3>
+          <h3 class="text-sm font-bold text-gray-800 mr-2 w-">POSTS</h3>
         </div>
       </div>
     </div>
-
     <!--post images-->
-    <% @user.posts.each do |posts| %>
-      <% posts.pictures.each do |picture| %>
-        <div class="grid grid-cols-3 gap-2 my-3">
-          <div class="flex-1 text-center px-4 py-2 m-2 ">
-            <div class="w-full"
-            <%= link_to image_tag(picture, class: " block bg-center bg-no-repeat bg-cover h-40 w-full rounded-lg") %>
-          </div>
-        </div>
-      <% end %>
-    <% end %>
+
+    <div class="flex pt-4">
+      <div class="flex-1 text-center px-4 py-2 m-2">
+        <% @user.posts.each do |posts| %>
+          <% posts.pictures.each do |picture| %>
+            <%= link_to image_tag(picture, class: " block bg-center bg-no-repeat bg-cover h-screen w-60 rounded-lg") %>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
   </div>
 </div>
