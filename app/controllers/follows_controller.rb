@@ -1,16 +1,30 @@
 class FollowsController < ApplicationController
 
   def create
-    other_user = User.find(params[:user_id])
-    @fol = Follow.new(follower_id: current_user.id, followed_id: other_user.id)
-
-    @fol.save
-    redirect_to user_path(other_user)
+    @other_user = User.find(params[:user_id])
+    @fol = Follow.new(follower_id: current_user.id, followed_id: @other_user.id)
+    respond_to do |format|
+      if @fol.save
+        format.turbo_stream
+        format.html { redirect_to user_path(@other_user)}
+      end
+    end
   end
 
   def destroy
     @fol = Follow.find(params[:id])
-    @fol.destroy
-    redirect_to user_path(@fol.followed_id)
+
+    respond_to do |format|
+      if @fol.destroy
+        format.turbo_stream
+        redirect_to user_path(@fol.followed_id)
+      end
+    end
+  end
+
+  private
+
+  def follow_params
+    params.permit(:followed_id, :follower_id)
   end
 end
