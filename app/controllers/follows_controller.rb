@@ -17,14 +17,8 @@ class FollowsController < ApplicationController
     respond_to do |format|
       if @fol.destroy
         format.turbo_stream
-        redirect_to user_path(@fol.followed_id)
+        format.html { redirect_to user_path(@fol.followed_id)}
       end
     end
-  end
-
-  private
-
-  def follow_params
-    params.permit(:followed_id, :follower_id)
   end
 end

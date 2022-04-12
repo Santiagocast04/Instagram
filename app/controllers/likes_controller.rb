@@ -15,7 +15,7 @@ class LikesController < ApplicationController
   end
 
   def destroy
-    @like = current_user.likes.find_by(likeable_id: params[:id], likeable_type: Post.name)
+    @like = current_user.likes.find_by(likeable_id: params[:id], likeable_type: Comment.name)
     if @like.destroy
       respond_to do |format|
         format.turbo_stream

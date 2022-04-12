@@ -1,8 +1,12 @@
 <%= turbo_stream.update("like_#{dom_id @like.likeable}") do %>
   <div class="like mr-4">
     <%= link_to like_path(@like.likeable), method: :delete, data: { turbo_method: :delete } do %>
-      <i class="fa-solid fa-heart fa-2x"></i>
-    <% end %>
+			<% if @like.likeable.class.name == "Post" %>
+      	<i class="fa-solid fa-heart fa-2x"></i>
+			<%else %>
+				<i class="fa-solid fa-heart "></i>
+			<%end %>
+	<% end %>
   </div>
 <% end %>
 
