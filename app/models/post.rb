@@ -3,6 +3,4 @@ class Post < ApplicationRecord
   has_many_attached :pictures
   has_many :comments
   has_many :likes, as: :likeable
-
-  validates :pictures, :user_id, :description, uniqueness: true
 end

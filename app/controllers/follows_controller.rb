@@ -13,7 +13,6 @@ class FollowsController < ApplicationController
 
   def destroy
     @fol = Follow.find(params[:id])
-
     respond_to do |format|
       if @fol.destroy
         format.turbo_stream
